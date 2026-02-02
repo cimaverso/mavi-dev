@@ -1,0 +1,141 @@
+.reserva-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.reserva-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+}
+
+.reserva-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.reserva-info-item label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.reserva-info-value {
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.reserva-info-value i {
+  color: var(--color-accent-green);
+  font-size: var(--font-size-lg);
+}
+
+.reserva-embarcacion,
+.reserva-cliente,
+.reserva-fecha {
+  font-weight: var(--font-weight-medium);
+}
+
+.reserva-divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--spacing-md) 0;
+}
+
+.reserva-edit-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.reserva-section-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-accent-green);
+}
+
+.checkbox-text {
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+}
+
+.form-help-text {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  padding-left: calc(18px + var(--spacing-sm));
+}
+
+.reserva-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+}
+
+.badge-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #FFC107;
+}
+
+.badge-success {
+  background-color: rgba(0, 229, 126, 0.1);
+  color: var(--color-accent-green);
+}
+
+.badge-error {
+  background-color: rgba(255, 82, 82, 0.1);
+  color: var(--color-error);
+}
+
+@media (max-width: 768px) {
+  .reserva-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reserva-modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .reserva-modal-actions button {
+    width: 100%;
+  }
+}

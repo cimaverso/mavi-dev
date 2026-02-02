@@ -1,0 +1,8 @@
+/**
+ * Estilos de la página de servicios
+ * Reutiliza estilos de proveedores
+ */
+
+@import '../Proveedores/ProveedoresPage.css';
+
+/* Estilos específicos de servicios si es necesario en el futuro */

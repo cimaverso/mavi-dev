@@ -1,0 +1,49 @@
+/* Métricas específicas de reservas */
+.metric-icon-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #FFC107;
+}
+
+.metric-icon-success {
+  background-color: rgba(0, 229, 126, 0.1);
+  color: var(--color-accent-green);
+}
+
+.metric-icon-error {
+  background-color: rgba(255, 82, 82, 0.1);
+  color: var(--color-error);
+}
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3xl) var(--spacing-lg);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 2px dashed var(--color-border);
+  text-align: center;
+  margin-top: var(--spacing-xl);
+}
+
+.empty-state i {
+  font-size: 64px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  max-width: 400px;
+}

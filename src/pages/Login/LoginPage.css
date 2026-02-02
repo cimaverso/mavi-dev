@@ -1,0 +1,148 @@
+/**
+ * LoginPage.css
+ * Diseño centrado con Glassmorphism y fondo adaptativo
+ */
+
+:root {
+  /* Variables para el efecto Glass */
+  --glass-bg: rgba(20, 20, 30, 0.65); /* Fondo oscuro translúcido */
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  /* Color de fondo para móvil (Azul) */
+  --blue-mobile-bg: #0f172a; /* Ajusta este hex al tono de azul exacto que quieras */
+}
+
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* CENTRADO TOTAL */
+  
+  /* Imagen de fondo con una capa oscura encima para mejorar lectura */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('/Login.webp');
+  background-size: cover;     /* Se adapta para cubrir todo */
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  padding: var(--spacing-lg);
+}
+
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  
+  /* --- EFECTO GLASSMORPHISM --- */
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);       /* Desenfoque del fondo */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-2xl);
+  color: #ffffff;
+  
+  /* Animación suave al cargar */
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.login-logo {
+  display: block;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto var(--spacing-lg);
+  /* Sutil sombra para resaltar el logo */
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+.login-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: 0.5px;
+}
+
+.login-subtitle {
+  font-size: var(--font-size-base);
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* --- ESTILOS PARA INPUTS DENTRO DEL GLASS --- */
+/* Forzamos estilos transparentes para que combinen con el vidrio */
+.login-form input {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+}
+
+.login-form input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.login-form input:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(0, 229, 126, 0.6) !important; /* Color de acento al enfocar */
+  outline: none;
+}
+
+/* Ajuste de etiquetas o iconos si es necesario */
+.login-form label, .login-form i {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.login-footer {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: center;
+}
+
+.login-help-text {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* --- MÓVIL --- */
+@media (max-width: 768px) {
+  .login-page {
+    /* Quitamos imagen y ponemos azul sólido */
+    background-image: none;
+    background-color: var(--blue-mobile-bg);
+    padding: var(--spacing-md);
+  }
+
+  .login-container {
+    padding: var(--spacing-xl);
+    /* En móvil, a veces es mejor quitar el blur para rendimiento, 
+       pero mantener el fondo oscuro */
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    box-shadow: none;
+  }
+
+  .login-logo {
+    width: 70px;
+    height: 70px;
+  }
+}

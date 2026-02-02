@@ -1,0 +1,110 @@
+/**
+ * Estilos del componente Input
+ */
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  width: 100%;
+}
+
+.input-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.input-required {
+  color: var(--color-error);
+  margin-left: 4px;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-field {
+  width: 100%;
+  height: var(--input-height);
+  padding: var(--input-padding-y) var(--input-padding-x);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background-color: var(--input-bg);
+  border: var(--border-width) solid var(--input-border);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px rgba(0, 229, 126, 0.1);
+}
+
+.input-field:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--color-bg-tertiary);
+}
+
+.input-field::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Input con icono */
+.input-with-icon {
+  padding-left: 40px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+/* Estado de error */
+.input-error {
+  border-color: var(--color-error);
+}
+
+.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(255, 82, 82, 0.1);
+}
+
+.input-error-message {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+}
+
+/* Textarea */
+textarea.input-field {
+  height: auto;
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Input numérico - ocultar spinners */
+input[type='number'].input-field::-webkit-inner-spin-button,
+input[type='number'].input-field::-webkit-outer-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'].input-field {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+/* Responsive */
+@media (max-width: 768px) {
+  .input-field {
+    font-size: var(--font-size-sm);
+  }
+}

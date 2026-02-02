@@ -1,0 +1,113 @@
+/**
+ * Estilos del componente Topbar
+ */
+
+.topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: var(--sidebar-width-expanded);
+  height: var(--topbar-height);
+  background-color: var(--color-bg-primary);
+  border-bottom: var(--border-width) solid var(--color-border);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--spacing-lg);
+  gap: var(--spacing-md);
+  transition: left var(--sidebar-transition);
+  z-index: 90;
+}
+
+/* Cuando sidebar está colapsado */
+.sidebar-collapsed ~ .main-content .topbar {
+  left: var(--sidebar-width-collapsed);
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .topbar {
+    left: 0;
+  }
+}
+
+.topbar-mobile-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: var(--border-radius-md);
+  color: var(--color-text);
+  font-size: 24px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.topbar-mobile-toggle:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.topbar-spacer {
+  flex: 1;
+}
+
+/* User section */
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.topbar-user-info {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .topbar-user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+.topbar-user-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.topbar-user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-bg-secondary);
+  border-radius: 50%;
+  color: var(--color-accent-green);
+  font-size: 24px;
+}
+
+.topbar-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-secondary);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.topbar-logout:hover {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-error);
+}

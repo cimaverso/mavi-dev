@@ -1,0 +1,134 @@
+/**
+ * Variables CSS globales
+ * Define colores, tipografía, espaciado y breakpoints
+ */
+
+:root {
+  /* ==================== COLORES ==================== */
+  
+  /* Colores principales */
+  --color-primary: #0C243A;
+  --color-accent-green: #00E57E;
+  --color-accent-lime: #ABF43C;
+  --color-text: #FFFFFF;
+  --color-text-secondary: #B0BEC5;
+  --color-text-muted: #78909C;
+  
+  /* Colores de estado */
+  --color-success: #00E57E;
+  --color-error: #FF5252;
+  --color-warning: #FFC107;
+  --color-info: #2196F3;
+  
+  /* Backgrounds */
+  --color-bg-primary: #0C243A;
+  --color-bg-secondary: #1A3A52;
+  --color-bg-tertiary: #2A4A62;
+  --color-bg-hover: #3A5A72;
+  
+  /* Bordes */
+  --color-border: #2A4A62;
+  --color-border-light: #3A5A72;
+  --color-border-focus: #00E57E;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  
+  /* ==================== TIPOGRAFÍA ==================== */
+  
+  --font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Tamaños de fuente */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 30px;
+  --font-size-4xl: 36px;
+  
+  /* Pesos de fuente */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  
+  /* Alturas de línea */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* ==================== ESPACIADO ==================== */
+  
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  
+  /* ==================== LAYOUT ==================== */
+  
+  /* Sidebar */
+  --sidebar-width-expanded: 260px;
+  --sidebar-width-collapsed: 70px;
+  --sidebar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Topbar */
+  --topbar-height: 60px;
+  
+  /* Z-index */
+  --z-index-dropdown: 1000;
+  --z-index-modal: 1050;
+  --z-index-toast: 1100;
+  --z-index-tooltip: 1150;
+  
+  /* ==================== BORDES Y RADIOS ==================== */
+  
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-full: 9999px;
+  
+  --border-width: 1px;
+  --border-width-thick: 2px;
+  
+  /* ==================== TRANSICIONES ==================== */
+  
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+  
+  /* ==================== BREAKPOINTS (para JS) ==================== */
+  
+  --breakpoint-mobile: 768px;
+  --breakpoint-tablet: 1024px;
+  --breakpoint-desktop: 1280px;
+  
+  /* ==================== FORMULARIOS ==================== */
+  
+  --input-height: 40px;
+  --input-padding-x: 12px;
+  --input-padding-y: 8px;
+  --input-bg: var(--color-bg-secondary);
+  --input-border: var(--color-border);
+  --input-border-focus: var(--color-accent-green);
+  
+  /* ==================== TABLAS ==================== */
+  
+  --table-header-bg: var(--color-bg-secondary);
+  --table-row-hover: var(--color-bg-hover);
+  --table-border: var(--color-border);
+  
+  /* ==================== ESTADOS DE RESERVA ==================== */
+  
+  --status-pendiente: #FFC107;
+  --status-confirmada: #00E57E;
+  --status-cancelada: #FF5252;
+}

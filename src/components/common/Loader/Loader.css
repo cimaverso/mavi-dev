@@ -1,0 +1,94 @@
+/**
+ * Estilos del componente Loader
+ */
+
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+}
+
+.loader-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  background-color: rgba(12, 36, 58, 0.9);
+  z-index: var(--z-index-modal);
+}
+
+/* Spinner */
+.loader-spinner {
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent-green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Tamaños spinner */
+.loader-small.loader-spinner {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.loader-medium.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
+.loader-large.loader-spinner {
+  width: 60px;
+  height: 60px;
+  border-width: 4px;
+}
+
+/* Dots */
+.loader-dots {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.loader-dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-accent-green);
+  border-radius: 50%;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.loader-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.loader-small .loader-dot {
+  width: 8px;
+  height: 8px;
+}
+
+.loader-large .loader-dot {
+  width: 16px;
+  height: 16px;
+}
+
+/* Message */
+.loader-message {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: center;
+}

@@ -1,0 +1,77 @@
+/**
+ * Estilos del componente MainLayout
+ */
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-bg-primary);
+}
+
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width-expanded);
+  transition: margin-left var(--sidebar-transition);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Cuando sidebar está colapsado */
+.main-content-expanded {
+  margin-left: var(--sidebar-width-collapsed);
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+.main-body {
+  flex: 1;
+  margin-top: var(--topbar-height);
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+}
+
+/* Container para contenido centrado */
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Page header */
+.page-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-body {
+    padding: var(--spacing-md);
+  }
+
+  .page-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .page-description {
+    font-size: var(--font-size-sm);
+  }
+}
