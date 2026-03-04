@@ -24,6 +24,20 @@ class ProveedorServicio:
         db.commit()
         db.refresh(proveedor)
         return proveedor
+    
+    @staticmethod
+    def actualizar_proveedor(db: Session, proveedor: Proveedor):
+        proveedor_encontrado = ProveedorServicio.obtener_por_id(db, proveedor.prov_id)
+        if not proveedor_encontrado:
+            None
+
+        proveedor_encontrado.prov_nombre = proveedor.prov_nombre
+        proveedor_encontrado.prov_telefono = proveedor.prov_telefono
+        
+        db.commit()
+        db.refresh(proveedor_encontrado)
+
+        return proveedor_encontrado
 
     @staticmethod
     def eliminar(db: Session, proveedor_id: int) -> bool:
