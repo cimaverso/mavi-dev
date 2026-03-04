@@ -38,9 +38,9 @@ def crear_proveedor(proveedor: ProveedorCreate, db: Session = Depends(get_db)):
     
     return proveedor
 
-@router.patch("/{proverdor_id}", response_model=ProveedorRead)
-def actualizar_proveedor(prov_id: int, proveedor: ProveedorUpdate, db: Session = Depends(get_db)):
-    proveedor = ProveedorServicio.actualizar_proveedor(db, prov_id, proveedor)
+@router.patch("/{proveedor_id}", response_model=ProveedorRead)
+def actualizar_proveedor(proveedor_id: int, proveedor: ProveedorUpdate, db: Session = Depends(get_db)):
+    proveedor = ProveedorServicio.actualizar_proveedor(db, proveedor_id, proveedor)
     if not proveedor:
         raise HTTPException(
             status_code=400,
