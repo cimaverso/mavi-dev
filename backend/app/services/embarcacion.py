@@ -5,6 +5,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
 from app.models.embarcaciones import Embarcacion
+from app.schemas.embarcacion import EmbarcacionCreate, EmbarcacionUpdate
 
 
 class EmbarcacionServicio:
@@ -47,25 +48,35 @@ class EmbarcacionServicio:
     @staticmethod
     def crear(
         db: Session,
-        embarcacion: Embarcacion
+        data: EmbarcacionCreate
     ) -> Embarcacion:
 
-        db.add(embarcacion)
+        nueva = Embarcacion(**data.model_dump())
+
+        db.add(nueva)
         db.commit()
-        db.refresh(embarcacion)
-        return embarcacion
+        db.refresh(nueva)
+
+        return nueva
 
     @staticmethod
-    def eliminar(
+    def actualizar(
         db: Session,
-        embarcacion_id: int
-    ) -> bool:
+        embarcacion_id: int,
+        data: EmbarcacionUpdate
+    ) -> Optional[Embarcacion]:
 
         embarcacion = db.get(Embarcacion, embarcacion_id)
 
         if not embarcacion:
-            return False
+            return None
 
-        db.delete(embarcacion)
+        datos = data.model_dump(exclude_unset=True)
+
+        for key, value in datos.items():
+            setattr(embarcacion, key, value)
+
         db.commit()
-        return True
+        db.refresh(embarcacion)
+
+        return embarcacion
