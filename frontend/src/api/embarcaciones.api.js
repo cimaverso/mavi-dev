@@ -12,7 +12,7 @@ const embarcacionesApi = {
    * @returns {Promise<object>} Lista de embarcaciones
    */
   getAll: () => {
-    return httpClient.get('/api/embarcaciones');
+    return httpClient.get('/embarcaciones');
   },
 
   /**
@@ -21,7 +21,7 @@ const embarcacionesApi = {
    * @returns {Promise<object>} Embarcación
    */
   getById: (id) => {
-    return httpClient.get(`/api/embarcaciones/${id}`);
+    return httpClient.get(`/embarcaciones/${id}`);
   },
 
   /**
@@ -30,7 +30,7 @@ const embarcacionesApi = {
    * @returns {Promise<object>} Embarcación creada
    */
   create: (data) => {
-    return httpClient.post('/api/embarcaciones', data);
+    return httpClient.post('/embarcaciones', data);
   },
 
   /**
