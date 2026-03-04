@@ -275,6 +275,21 @@ function EmbarcacionRow({
         {errors.valorCliente && <span className="cell-error-text">{errors.valorCliente}</span>}
       </td>
 
+
+      <td>
+        <div className="editable-cell">
+          <input
+            type="text"
+            value={formData.caracteristicas}
+            onChange={(e) => handleChange('caracteristicas', e.target.value)}
+            onFocus={() => handleFocus('caracteristicas')}
+            onBlur={handleBlur}
+            className={`cell-input ${editingField === 'caracteristicas' ? 'cell-editing' : ''}`}
+            placeholder="Características"
+          />
+        </div>
+      </td>
+
       {/* Media */}
       <td className="media-cell">
         <button
@@ -290,7 +305,7 @@ function EmbarcacionRow({
         </button>
       </td>
 
-      
+
     </tr>
   );
 }

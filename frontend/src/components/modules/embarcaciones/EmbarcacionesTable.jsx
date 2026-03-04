@@ -3,13 +3,13 @@ import EmbarcacionRow from './EmbarcacionRow.jsx';
 import Loader from '../../common/Loader/Loader.jsx';
 import './EmbarcacionesTable.css';
 
-function EmbarcacionesTable({ 
-  embarcaciones, 
+function EmbarcacionesTable({
+  embarcaciones,
   tipos,
   proveedores,
-  loading, 
-  onUpdate, 
-  onDelete, 
+  loading,
+  onUpdate,
+  onDelete,
   onAdd,
   onOpenTipoModal,
   onOpenProveedorModal,
@@ -70,8 +70,8 @@ function EmbarcacionesTable({
       newErrors.valorCliente = 'El valor cliente debe ser mayor a 0';
     }
 
-    if (newEmbarcacion.valorCliente && newEmbarcacion.valorProveedor && 
-        parseFloat(newEmbarcacion.valorCliente) < parseFloat(newEmbarcacion.valorProveedor)) {
+    if (newEmbarcacion.valorCliente && newEmbarcacion.valorProveedor &&
+      parseFloat(newEmbarcacion.valorCliente) < parseFloat(newEmbarcacion.valorProveedor)) {
       newErrors.valorCliente = 'El valor cliente debe ser mayor o igual al valor proveedor';
     }
 
@@ -148,6 +148,7 @@ function EmbarcacionesTable({
               <th>Capacidad</th>
               <th>Valor Proveedor</th>
               <th>Valor Cliente</th>
+              <th>Características</th>
               <th>Media</th>
             </tr>
           </thead>
@@ -240,6 +241,20 @@ function EmbarcacionesTable({
                     step="0.01"
                   />
                   {errors.valorCliente && <span className="cell-error-text">{errors.valorCliente}</span>}
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={newEmbarcacion.caracteristicas || ''}
+                    onChange={(e) =>
+                      setNewEmbarcacion(prev => ({
+                        ...prev,
+                        caracteristicas: e.target.value
+                      }))
+                    }
+                    className="cell-input"
+                    placeholder="Características"
+                  />
                 </td>
                 <td className="media-cell">-</td>
                 <td className="actions-cell">
