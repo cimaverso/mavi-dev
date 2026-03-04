@@ -4,6 +4,7 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from app.models.proveedores import Proveedor
+from app.schemas.proveedor import ProveedorUpdate, ProveedorCreate
 
 
 class ProveedorServicio:
@@ -19,20 +20,28 @@ class ProveedorServicio:
         return db.get(Proveedor, proveedor_id)
 
     @staticmethod
-    def crear(db: Session, proveedor: Proveedor) -> Proveedor:
-        db.add(proveedor)
+    def crear(db: Session, proveedor: ProveedorCreate) -> Proveedor:
+
+        nuevo_proveedor = Proveedor(
+            prov_nombre=proveedor.prov_nombre,
+            prov_telefono=proveedor.prov_telefono
+        )
+        db.add(nuevo_proveedor)
         db.commit()
-        db.refresh(proveedor)
-        return proveedor
+        db.refresh(nuevo_proveedor)
+        return nuevo_proveedor
     
     @staticmethod
-    def actualizar_proveedor(db: Session, proveedor: Proveedor):
-        proveedor_encontrado = ProveedorServicio.obtener_por_id(db, proveedor.prov_id)
+    def actualizar_proveedor(db: Session, prov_id:int, prov_data: ProveedorUpdate):
+        proveedor_encontrado = ProveedorServicio.obtener_por_id(db, prov_id)
         if not proveedor_encontrado:
             None
 
-        proveedor_encontrado.prov_nombre = proveedor.prov_nombre
-        proveedor_encontrado.prov_telefono = proveedor.prov_telefono
+        if prov_data.prov_nombre is not None:
+            proveedor_encontrado.prov_nombre = prov_data.prov_nombre
+        
+        if prov_data.prov_telefono is not None:
+            proveedor_encontrado.prov_telefono = prov_data.prov_telefono
         
         db.commit()
         db.refresh(proveedor_encontrado)
