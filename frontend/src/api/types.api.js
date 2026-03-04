@@ -1,72 +1,56 @@
-/**
- * API module para tipos de embarcación
- */
-
 import httpClient from './httpClient.js';
-import { mockUpdate, mockDelete } from './mockData.js';
-import ENV from '../config/env.js';
 
 const typesApi = {
-  /**
-   * Obtener todos los tipos de embarcación
-   * @returns {Promise<object>} Lista de tipos
-   */
-  getAll: () => {
-    return httpClient.get('/api/tipos-embarcacion');
+
+  getAll: async () => {
+
+    const response = await httpClient.get('/api/tipos_embarcacion');
+
+    if (response.success) {
+      return {
+        success: true,
+        data: response.data.map(t => ({
+          id: t.tp_id,
+          nombre: t.tp_nombre,
+          descripcion: t.tp_descripcion
+        }))
+      };
+    }
+
+    return response;
   },
 
-  /**
-   * Obtener un tipo por ID
-   * @param {number} id - ID del tipo
-   * @returns {Promise<object>} Tipo de embarcación
-   */
   getById: (id) => {
-    return httpClient.get(`/api/tipos-embarcacion/${id}`);
+    return httpClient.get(`/api/tipos_embarcacion/${id}`);
   },
 
-  /**
-   * Crear nuevo tipo de embarcación
-   * @param {object} data - Datos del tipo
-   * @returns {Promise<object>} Tipo creado
-   */
   create: (data) => {
-    return httpClient.post('/api/tipos-embarcacion', data);
+
+    const payload = {
+      tp_nombre: data.nombre,
+      tp_descripcion: data.descripcion
+    };
+
+    return httpClient.post('/api/tipos_embarcacion', payload);
   },
 
-  /**
-   * Actualizar tipo de embarcación
-   * @param {number} id - ID del tipo
-   * @param {object} data - Campos a actualizar
-   * @returns {Promise<object>} Tipo actualizado
-   */
   update: (id, data) => {
-    if (ENV.USE_MOCK_DATA) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(mockUpdate('tiposEmbarcacion', id, data));
-        }, 300);
-      });
-    }
 
-    return httpClient.patch(`/api/tipos-embarcacion/${id}`, data);
+    const payload = {};
+
+    if (data.nombre !== undefined)
+      payload.tp_nombre = data.nombre;
+
+    if (data.descripcion !== undefined)
+      payload.tp_descripcion = data.descripcion;
+
+    return httpClient.patch(`/api/tipos_embarcacion/${id}`, payload);
   },
 
-  /**
-   * Eliminar tipo de embarcación
-   * @param {number} id - ID del tipo
-   * @returns {Promise<object>}
-   */
   delete: (id) => {
-    if (ENV.USE_MOCK_DATA) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(mockDelete('tiposEmbarcacion', id));
-        }, 300);
-      });
-    }
+    return httpClient.delete(`/api/tipos_embarcacion/${id}`);
+  }
 
-    return httpClient.delete(`/api/tipos-embarcacion/${id}`);
-  },
 };
 
 export default typesApi;

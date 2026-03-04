@@ -16,7 +16,6 @@ import Loader from './components/common/Loader/Loader.jsx';
 import LoginPage from './pages/Login/LoginPage.jsx';
 import EmbarcacionesPage from './pages/Embarcaciones/EmbarcacionesPage.jsx';
 import ProveedoresPage from './pages/Proveedores/ProveedoresPage.jsx';
-import ServiciosPage from './pages/Servicios/ServiciosPage.jsx';
 import ReservasPage from './pages/Reservas/ReservasPage.jsx';
 import SoportePage from './pages/Soporte/SoportePage.jsx';
 import AgentePage from './pages/Agente/AgentePage.jsx';
@@ -81,7 +80,6 @@ function App() {
                   {/* Módulos principales */}
                   <Route path="/embarcaciones" element={<EmbarcacionesPage />} />
                   <Route path="/proveedores" element={<ProveedoresPage />} />
-                  <Route path="/servicios" element={<ServiciosPage />} />
                   <Route path="/reservas" element={<ReservasPage />} />
                   <Route path="/soporte" element={<SoportePage />} />
                   <Route path="/agente" element={<AgentePage />} />

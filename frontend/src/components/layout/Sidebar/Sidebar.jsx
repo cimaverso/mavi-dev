@@ -23,11 +23,6 @@ function Sidebar() {
       label: 'Proveedores',
     },
     {
-      path: '/servicios',
-      icon: 'bi-grid',
-      label: 'Servicios',
-    },
-    {
       path: '/reservas',
       icon: 'bi-calendar-check',
       label: 'Reservas',

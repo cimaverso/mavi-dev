@@ -3,78 +3,60 @@
  */
 
 import httpClient from './httpClient.js';
-import { mockUpdate, mockDelete } from './mockData.js';
-import ENV from '../config/env.js';
 
 const proveedoresApi = {
-  /**
-   * Obtener todos los proveedores
-   * @returns {Promise<object>} Lista de proveedores
-   */
-  getAll: () => {
-    return httpClient.get('/api/proveedores');
+
+  getAll: async () => {
+    const response = await httpClient.get('/api/proveedores')
+
+    if (response.success) {
+      return {
+        success: true,
+        data: response.data.map(p => ({
+          ...p,
+          id: p.prov_id,
+          nombre: p.prov_nombre,
+          telefono: p.prov_telefono
+        }))
+      }
+    }
+
+    return response
   },
 
-  /**
-   * Obtener un proveedor por ID
-   * @param {number} id - ID del proveedor
-   * @returns {Promise<object>} Proveedor
-   */
   getById: (id) => {
     return httpClient.get(`/api/proveedores/${id}`);
   },
 
-  /**
-   * Crear nuevo proveedor
-   * @param {object} data - Datos del proveedor
-   * @returns {Promise<object>} Proveedor creado
-   */
   create: (data) => {
-    return httpClient.post('/api/proveedores', data);
+
+    const payload = {
+      prov_nombre: data.nombre,
+      prov_telefono: data.telefono
+    }
+
+    return httpClient.post('/api/proveedores', payload);
   },
 
-  /**
-   * Actualizar proveedor
-   * @param {number} id - ID del proveedor
-   * @param {object} data - Campos a actualizar
-   * @returns {Promise<object>} Proveedor actualizado
-   */
   update: (id, data) => {
-    if (ENV.USE_MOCK_DATA) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(mockUpdate('proveedores', id, data));
-        }, 300);
-      });
+
+    const payload = {}
+
+    if (data.nombre !== undefined) {
+      payload.prov_nombre = data.nombre
     }
 
-    return httpClient.patch(`/api/proveedores/${id}`, data);
+    if (data.telefono !== undefined) {
+      payload.prov_telefono = data.telefono
+    }
+
+    return httpClient.patch(`/api/proveedores/${id}`, payload)
   },
 
-  /**
-   * Eliminar proveedor
-   * @param {number} id - ID del proveedor
-   * @returns {Promise<object>}
-   */
   delete: (id) => {
-    if (ENV.USE_MOCK_DATA) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(mockDelete('proveedores', id));
-        }, 300);
-      });
-    }
-
     return httpClient.delete(`/api/proveedores/${id}`);
   },
 
-  /**
-   * Obtener métricas de proveedores
-   * @returns {Promise<object>} Total de proveedores
-   */
-  getMetrics: () => {
-    return httpClient.get('/api/metrics/proveedores');
-  },
 };
 
 export default proveedoresApi;

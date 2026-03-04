@@ -149,7 +149,6 @@ function EmbarcacionesTable({
               <th>Valor Proveedor</th>
               <th>Valor Cliente</th>
               <th>Media</th>
-              <th className="actions-column">Acciones</th>
             </tr>
           </thead>
           <tbody>

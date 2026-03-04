@@ -11,10 +11,18 @@ function MetricasProveedores() {
 
   const loadMetrics = async () => {
     try {
-      const response = await proveedoresApi.getMetrics();
+      const response = await proveedoresApi.getAll();
+
       if (response.success) {
-        setMetrics(response.data);
+        const proveedores = response.data;
+
+        const metrics = {
+          total: proveedores.length
+        };
+
+        setMetrics(metrics);
       }
+
     } catch (error) {
       console.error('Error cargando métricas:', error);
     } finally {

@@ -3,105 +3,89 @@
  */
 
 import httpClient from './httpClient.js';
-import { mockUpdate, mockDelete } from './mockData.js';
-import ENV from '../config/env.js';
 
 const embarcacionesApi = {
-  /**
-   * Obtener todas las embarcaciones
-   * @returns {Promise<object>} Lista de embarcaciones
-   */
-  getAll: () => {
-    return httpClient.get('/embarcaciones');
+
+  // Obtener todas
+  getAll: async () => {
+
+    const response = await httpClient.get('/api/embarcaciones')
+
+    if (response.success) {
+      return {
+        success: true,
+        data: response.data.map(e => ({
+          ...e,
+          id: e.emb_id,
+          nombre: e.emb_nombre,
+          tipoId: e.emb_idtipo,
+          proveedorId: e.emb_idproveedor,
+          capacidad: e.emb_capacidad,
+          valorProveedor: e.emb_valorproveedor,
+          valorCliente: e.emb_valorclientefinal,
+          caracteristicas: e.emb_caracteristicas
+        }))
+      }
+    }
+
+    return response
   },
 
-  /**
-   * Obtener una embarcación por ID
-   * @param {number} id - ID de la embarcación
-   * @returns {Promise<object>} Embarcación
-   */
+  // Obtener por ID
   getById: (id) => {
-    return httpClient.get(`/embarcaciones/${id}`);
+    return httpClient.get(`/api/embarcaciones/${id}`)
   },
 
-  /**
-   * Crear nueva embarcación
-   * @param {object} data - Datos de la embarcación
-   * @returns {Promise<object>} Embarcación creada
-   */
+  // Crear
   create: (data) => {
-    return httpClient.post('/embarcaciones', data);
+
+    const payload = {
+      emb_nombre: data.nombre,
+      emb_idtipo: data.tipoId,
+      emb_idproveedor: data.proveedorId,
+      emb_capacidad: data.capacidad,
+      emb_valorproveedor: data.valorProveedor,
+      valorCliente: data.valorClienteFinal,
+      emb_caracteristicas: data.caracteristicas
+    }
+
+    return httpClient.post('/api/embarcaciones', payload)
   },
 
-  /**
-   * Actualizar embarcación (para autosave)
-   * @param {number} id - ID de la embarcación
-   * @param {object} data - Campos a actualizar
-   * @returns {Promise<object>} Embarcación actualizada
-   */
+  // Actualizar
   update: (id, data) => {
-    // Si estamos en mock, usar helper de mockData
-    if (ENV.USE_MOCK_DATA) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(mockUpdate('embarcaciones', id, data));
-        }, 300);
-      });
-    }
 
-    return httpClient.patch(`/api/embarcaciones/${id}`, data);
+    const payload = {}
+
+    if (data.nombre !== undefined)
+      payload.emb_nombre = data.nombre
+
+    if (data.tipoId !== undefined)
+      payload.emb_idtipo = data.tipoId
+
+    if (data.proveedorId !== undefined)
+      payload.emb_idproveedor = data.proveedorId
+
+    if (data.capacidad !== undefined)
+      payload.emb_capacidad = data.capacidad
+
+    if (data.valorProveedor !== undefined)
+      payload.emb_valorproveedor = data.valorProveedor
+
+    if (data.valorCliente !== undefined)
+      payload.emb_valorclientefinal = data.valorClienteFinal
+
+    if (data.caracteristicas !== undefined)
+      payload.emb_caracteristicas = data.caracteristicas
+
+    return httpClient.patch(`/api/embarcaciones/${id}`, payload)
   },
 
-  /**
-   * Eliminar embarcación
-   * @param {number} id - ID de la embarcación
-   * @returns {Promise<object>}
-   */
+  // Eliminar
   delete: (id) => {
-    // Si estamos en mock, usar helper de mockData
-    if (ENV.USE_MOCK_DATA) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(mockDelete('embarcaciones', id));
-        }, 300);
-      });
-    }
+    return httpClient.delete(`/api/embarcaciones/${id}`)
+  }
 
-    return httpClient.delete(`/api/embarcaciones/${id}`);
-  },
-
-  /**
-   * Subir media (fotos/videos) para una embarcación
-   * @param {number} id - ID de la embarcación
-   * @param {File[]} files - Archivos a subir
-   * @returns {Promise<object>} URLs de los archivos subidos
-   */
-  uploadMedia: (id, files) => {
-    const formData = new FormData();
-    
-    files.forEach((file) => {
-      formData.append('files', file);
-    });
-
-    return httpClient.upload(`/api/embarcaciones/${id}/media`, formData);
-  },
-
-  /**
-   * Eliminar un archivo media
-   * @param {number} mediaId - ID del archivo media
-   * @returns {Promise<object>}
-   */
-  deleteMedia: (mediaId) => {
-    return httpClient.delete(`/api/embarcaciones/media/${mediaId}`);
-  },
-
-  /**
-   * Obtener métricas de embarcaciones
-   * @returns {Promise<object>} Total y por tipo
-   */
-  getMetrics: () => {
-    return httpClient.get('/api/metrics/embarcaciones');
-  },
-};
+}
 
 export default embarcacionesApi;

@@ -1,78 +1,29 @@
 /**
- * API module para reservas
+ * API module para tipos de embarcación
  */
+
 import httpClient from './httpClient.js';
-import ENV from '../config/env.js';
 
-const reservasApi = {
-  /**
-   * Obtener reservas con filtros opcionales
-   * @param {object} filters - { month: 'YYYY-MM', estado: 'PENDIENTE' }
-   * @returns {Promise<object>}
-   */
-  getAll: (filters = {}) => {
-    const params = new URLSearchParams();
-    
-    if (filters.month) {
-      params.append('month', filters.month);
-    }
-    
-    if (filters.estado) {
-      params.append('estado', filters.estado);
-    }
-    
-    const queryString = params.toString();
-    const url = queryString ? `/api/reservas?${queryString}` : '/api/reservas';
-    
-    return httpClient.get(url);
+const typesApi = {
+  getAll: () => {
+    return httpClient.get('/api/tipos-embarcacion');
   },
 
-  /**
-   * Obtener una reserva por ID
-   * @param {number} id
-   * @returns {Promise<object>}
-   */
   getById: (id) => {
-    return httpClient.get(`/api/reservas/${id}`);
+    return httpClient.get(`/api/tipos-embarcacion/${id}`);
   },
 
-  /**
-   * Actualizar estado o resolución de reserva
-   * @param {number} id
-   * @param {object} data - { estado?, resuelto? }
-   * @returns {Promise<object>}
-   */
+  create: (data) => {
+    return httpClient.post('/api/tipos-embarcacion', data);
+  },
+
   update: (id, data) => {
-    return httpClient.patch(`/api/reservas/${id}`, data);
+    return httpClient.patch(`/api/tipos-embarcacion/${id}`, data);
   },
 
-  /**
-   * Cambiar estado de reserva
-   * @param {number} id
-   * @param {string} nuevoEstado - PENDIENTE | CONFIRMADA | CANCELADA
-   * @returns {Promise<object>}
-   */
-  cambiarEstado: (id, nuevoEstado) => {
-    return reservasApi.update(id, { estado: nuevoEstado });
-  },
-
-  /**
-   * Marcar reserva como resuelta
-   * @param {number} id
-   * @param {boolean} resuelto
-   * @returns {Promise<object>}
-   */
-  marcarResuelto: (id, resuelto = true) => {
-    return reservasApi.update(id, { resuelto });
-  },
-
-  /**
-   * Obtener métricas de reservas
-   * @returns {Promise<object>}
-   */
-  getMetrics: () => {
-    return httpClient.get('/api/metrics/reservas');
+  delete: (id) => {
+    return httpClient.delete(`/api/tipos-embarcacion/${id}`);
   },
 };
 
-export default reservasApi;
+export default typesApi;

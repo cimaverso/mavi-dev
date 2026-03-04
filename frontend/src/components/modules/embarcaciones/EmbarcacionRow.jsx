@@ -4,12 +4,12 @@ import { validateRequired, validatePositive, validateComparison } from '../../..
 import { CONFIRMATION_MESSAGES } from '../../../utils/constants.js';
 import { formatCurrency } from '../../../utils/formatters.js';
 
-function EmbarcacionRow({ 
-  embarcacion, 
-  tipos, 
-  proveedores, 
-  onUpdate, 
-  onDelete, 
+function EmbarcacionRow({
+  embarcacion,
+  tipos,
+  proveedores,
+  onUpdate,
+  onDelete,
   onOpenTipoModal,
   onOpenProveedorModal,
   onOpenMediaGallery
@@ -17,8 +17,8 @@ function EmbarcacionRow({
   const [editingField, setEditingField] = useState(null);
   const [formData, setFormData] = useState({
     nombre: embarcacion.nombre,
-    idTipo: embarcacion.tipo?.id || '',
-    idProveedor: embarcacion.proveedor?.id || '',
+    idTipo: embarcacion.tipoId || '',
+    idProveedor: embarcacion.proveedorId || '',
     capacidad: embarcacion.capacidad || '',
     valorProveedor: embarcacion.valorProveedor || '',
     valorCliente: embarcacion.valorCliente || '',
@@ -32,8 +32,8 @@ function EmbarcacionRow({
 
     // Validar según el campo
     let error = null;
-    
-    switch(field) {
+
+    switch (field) {
       case 'nombre':
         error = validateRequired(value, 'El nombre');
         break;
@@ -44,22 +44,22 @@ function EmbarcacionRow({
         error = validateRequired(value, 'El proveedor');
         break;
       case 'capacidad':
-        error = validateRequired(value, 'La capacidad') || 
-                validatePositive(value, 'La capacidad');
+        error = validateRequired(value, 'La capacidad') ||
+          validatePositive(value, 'La capacidad');
         break;
       case 'valorProveedor':
         error = validateRequired(value, 'El valor proveedor') ||
-                validatePositive(value, 'El valor proveedor');
+          validatePositive(value, 'El valor proveedor');
         break;
       case 'valorCliente':
         error = validateRequired(value, 'El valor cliente') ||
-                validatePositive(value, 'El valor cliente') ||
-                validateComparison(
-                  value, 
-                  formData.valorProveedor, 
-                  'gte',
-                  'El valor cliente debe ser mayor o igual al valor proveedor'
-                );
+          validatePositive(value, 'El valor cliente') ||
+          validateComparison(
+            value,
+            formData.valorProveedor,
+            'gte',
+            'El valor cliente debe ser mayor o igual al valor proveedor'
+          );
         break;
     }
 
@@ -290,17 +290,7 @@ function EmbarcacionRow({
         </button>
       </td>
 
-      {/* Acciones */}
-      <td className="actions-cell">
-        <button
-          type="button"
-          className="action-btn action-btn-delete"
-          onClick={handleDelete}
-          title="Eliminar embarcación"
-        >
-          <i className="bi bi-trash"></i>
-        </button>
-      </td>
+      
     </tr>
   );
 }
