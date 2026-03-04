@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from fastapi.middleware.cors import CORSMiddleware
 import app.models.proveedores
 import app.models.embarcaciones
 import app.models.embarcacion_media
@@ -13,7 +13,15 @@ from app.core.db import engine
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 Base.metadata.create_all(bind=engine)
 
-app.include_router(proveedor.router)
-app.include_router(embarcacion.router)
+app.include_router(proveedor.router, prefix="/api")
+app.include_router(embarcacion.router, prefix="/api")
