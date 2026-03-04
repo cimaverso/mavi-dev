@@ -48,7 +48,7 @@ def crear_embarcacion(
     return EmbarcacionServicio.crear(db, data)
 
 
-@router.put("/{embarcacion_id}", response_model=EmbarcacionResponse)
+@router.patch("/{embarcacion_id}", response_model=EmbarcacionResponse)
 def actualizar_embarcacion(
     embarcacion_id: int,
     data: EmbarcacionUpdate,

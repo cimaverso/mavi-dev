@@ -38,7 +38,7 @@ def crear_proveedor(proveedor: ProveedorCreate, db: Session = Depends(get_db)):
     
     return proveedor
 
-@router.put("/{prov_id}", response_model=ProveedorRead)
+@router.patch("/{proverdor_id}", response_model=ProveedorRead)
 def actualizar_proveedor(prov_id: int, proveedor: ProveedorUpdate, db: Session = Depends(get_db)):
     proveedor = ProveedorServicio.actualizar_proveedor(db, prov_id, proveedor)
     if not proveedor:
