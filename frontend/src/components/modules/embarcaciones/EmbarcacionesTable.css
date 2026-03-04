@@ -93,6 +93,20 @@
   cursor: pointer;
 }
 
+
+.table-search{
+  background:#1e3a4f;
+  border:1px solid rgba(255,255,255,0.1);
+  color:white;
+  padding:8px 12px;
+  border-radius:6px;
+  width:220px;
+}
+
+.table-search::placeholder{
+  color:#9fb3c8;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .data-table {

@@ -3,6 +3,7 @@ import EmbarcacionRow from './EmbarcacionRow.jsx';
 import Loader from '../../common/Loader/Loader.jsx';
 import './EmbarcacionesTable.css';
 
+
 function EmbarcacionesTable({
   embarcaciones,
   tipos,
@@ -25,6 +26,14 @@ function EmbarcacionesTable({
   });
   const [showNewRow, setShowNewRow] = useState(false);
   const [errors, setErrors] = useState({});
+  const [search, setSearch] = useState('');
+
+
+  const filteredEmbarcaciones = embarcaciones.filter(e =>
+    e.nombre?.toLowerCase().includes(search.toLowerCase()) ||
+    proveedores.find(p => p.id === e.proveedorId)?.nombre?.toLowerCase().includes(search.toLowerCase()) ||
+    tipos.find(t => t.id === e.tipoId)?.nombre?.toLowerCase().includes(search.toLowerCase())
+  );
 
   const handleAddClick = () => {
     setShowNewRow(true);
@@ -125,17 +134,32 @@ function EmbarcacionesTable({
   return (
     <div className="table-container">
       <div className="table-header">
+
         <h2 className="table-title">Lista de Embarcaciones</h2>
-        {!showNewRow && (
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleAddClick}
-          >
-            <i className="bi bi-plus-lg"></i>
-            Agregar Embarcación
-          </button>
-        )}
+
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+
+          <input
+            type="text"
+            placeholder="Buscar embarcación..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="table-search"
+          />
+
+          {!showNewRow && (
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleAddClick}
+            >
+              <i className="bi bi-plus-lg"></i>
+              Agregar Embarcación
+            </button>
+          )}
+
+        </div>
+
       </div>
 
       <div className="table-wrapper">
@@ -294,7 +318,7 @@ function EmbarcacionesTable({
                 </td>
               </tr>
             ) : (
-              embarcaciones.map(embarcacion => (
+              filteredEmbarcaciones.map(embarcacion => (
                 <EmbarcacionRow
                   key={embarcacion.id}
                   embarcacion={embarcacion}
